@@ -28,30 +28,20 @@
 
 ## 新しいドットファイルを追加する場合
 
-1. **ファイルを `dotfiles` ディレクトリ内に移動する**
-   例として `.vimrc` を追加する場合:
-   ```bash
-   mkdir -p ~/dotfiles/vim
-   mv ~/.vimrc ~/dotfiles/vim/.vimrc
-   ```
+以下のスクリプトを使用することで、ファイルの移動、`setup.sh` の更新、シンボリックリンクの作成、Git へのコミットを自動で行うことができます。
 
-2. **`setup.sh` を更新する**
-   `setup.sh` 内の `FILES_TO_LINK` 配列に、追加したファイルのエントリを記述します。
-   ```bash
-   FILES_TO_LINK=(
-       ...
-       "vim/.vimrc:.vimrc"
-   )
-   ```
+```bash
+./scripts/add_dotfile.sh <ファイルのパス> [カテゴリ名]
+```
 
-3. **セットアップスクリプトを実行する**
-   ```bash
-   ~/dotfiles/setup.sh
-   ```
+**例: `.vimrc` を追加する場合**
 
-4. **変更を Git で管理する**
-   ```bash
-   cd ~/dotfiles
-   git add .
-   git commit -m "Add .vimrc"
-   ```
+```bash
+./scripts/add_dotfile.sh ~/.vimrc vim
+```
+
+このコマンドを実行すると、以下の作業が自動的に行われます：
+1. `~/.vimrc` を `~/dotfiles/vim/.vimrc` に移動
+2. `setup.sh` の `FILES_TO_LINK` 配列にエントリを追加
+3. `setup.sh` を実行してシンボリックリンクを再作成
+4. 変更を Git でコミット
