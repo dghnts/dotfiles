@@ -10,6 +10,7 @@ FILES_TO_LINK=(
     "bash/.bash_logout:.bash_logout"
     "bash/.bash_aliases:.bash_aliases"
     "git/.gitconfig:.gitconfig"
+    "vim/.vimrv:.vimrv"
 )
 
 echo "Setting up dotfiles..."
