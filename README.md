@@ -31,13 +31,13 @@
 以下のスクリプトを使用することで、ファイルの移動、`setup.sh` の更新、シンボリックリンクの作成、Git へのコミットを自動で行うことができます。
 
 ```bash
-./scripts/add_dotfile.sh <ファイルのパス> [カテゴリ名]
+dotadd <ファイルのパス> [カテゴリ名]
 ```
 
 **例: `.vimrc` を追加する場合**
 
 ```bash
-./scripts/add_dotfile.sh ~/.vimrc vim
+dotadd ~/.vimrc vim
 ```
 
 このコマンドを実行すると、以下の作業が自動的に行われます：

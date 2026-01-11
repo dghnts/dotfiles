@@ -120,3 +120,6 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 # ====== Antigravity Launcher Config ======
 export PATH="$HOME/.local/bin:$PATH"
 # ====== End of Antigravity Launcher Config ======
+
+# Dotfiles scripts
+export PATH="$HOME/dotfiles/scripts:$PATH"
