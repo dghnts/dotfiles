@@ -34,5 +34,8 @@ set autoindent              " Copy indent from current line
 set smartindent             " Smart autoindenting
 
 " --- Key Bindings ---
+" Exit insert mode with 'jj'
+inoremap jj <Esc>
+
 " Clear highlight with Esc
 nnoremap <Esc><Esc> :nohlsearch<CR>
