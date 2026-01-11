@@ -22,13 +22,18 @@ if [ "$#" -lt 1 ]; then
     usage
 fi
 
-FILENAME="$1"
-# Ensure we are looking at the file in the HOME directory
-FILE_PATH="$HOME/$FILENAME"
+FILE_PATH="$1"
+# Expand ~
+if [[ "$FILE_PATH" == ~* ]]; then
+    FILE_PATH="${FILE_PATH/#\~/$HOME}"
+fi
+# Resolve absolute path (even if it doesn't exist)
+FILE_PATH=$(readlink -m "$FILE_PATH")
 
+IS_NEW=false
 if [ ! -f "$FILE_PATH" ]; then
-    echo "Error: File $FILE_PATH does not exist in your home directory."
-    exit 1
+    echo "Info: File $FILE_PATH does not exist. A new empty file will be created."
+    IS_NEW=true
 fi
 
 if [ -L "$FILE_PATH" ]; then
@@ -55,9 +60,15 @@ else
     exit 1
 fi
 
-echo "Step 1: Moving $FILE_PATH to $TARGET_DIR..."
-mkdir -p "$TARGET_DIR"
-mv "$FILE_PATH" "$TARGET_PATH"
+if [ "$IS_NEW" = true ]; then
+    echo "Step 1: Creating new file $TARGET_PATH..."
+    mkdir -p "$TARGET_DIR"
+    touch "$TARGET_PATH"
+else
+    echo "Step 1: Moving $FILE_PATH to $TARGET_DIR..."
+    mkdir -p "$TARGET_DIR"
+    mv "$FILE_PATH" "$TARGET_PATH"
+fi
 
 echo "Step 2: Updating setup.sh..."
 ENTRY="    \"$REL_SRC_PATH:$REL_DEST_PATH\""
