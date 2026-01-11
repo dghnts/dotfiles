@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 保存先ディレクトリの定義
-DOTFILES_DIR="$HOME/dotfiles"
+DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 SYSTEM_DIR="$DOTFILES_DIR/system"
 LIST_FILE="$SYSTEM_DIR/package_list.txt"
 

@@ -9,6 +9,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 DOTFILES_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 
 usage() {
+    local exit_code="${1:-1}"
     echo "Usage: dot <command> [arguments]"
     echo ""
     echo "Commands:"
@@ -17,7 +18,7 @@ usage() {
     echo "  update             Update system package list"
     echo "  setup [entry]      Run the setup script (link files)"
     echo "  help               Show this help message"
-    exit 1
+    exit "$exit_code"
 }
 
 if [ "$#" -lt 1 ]; then
@@ -29,19 +30,19 @@ shift
 
 case "$COMMAND" in
     add)
-        "$SCRIPT_DIR/add_dotfile.sh" "$@"
+        "$SCRIPT_DIR/cmds/add.sh" "$@"
         ;;
     mv)
-        "$SCRIPT_DIR/rename_dotfile.sh" "$@"
+        "$SCRIPT_DIR/cmds/mv.sh" "$@"
         ;;
     update)
-        "$SCRIPT_DIR/update_packages.sh" "$@"
+        "$SCRIPT_DIR/cmds/update.sh" "$@"
         ;;
     setup)
         "$DOTFILES_DIR/setup.sh" "$@"
         ;;
     help|--help|-h)
-        usage
+        usage 0
         ;;
     *)
         echo "Error: Unknown command '$COMMAND'"
