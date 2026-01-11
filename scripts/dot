@@ -1,0 +1,50 @@
+#!/bin/bash
+
+# scripts/dot
+# Main entry point for dotfiles management commands.
+
+set -e
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+DOTFILES_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
+
+usage() {
+    echo "Usage: dot <command> [arguments]"
+    echo ""
+    echo "Commands:"
+    echo "  add <file> [cat]    Add a new dotfile to management"
+    echo "  mv <old> <new>      Rename a managed dotfile"
+    echo "  update             Update system package list"
+    echo "  setup [entry]      Run the setup script (link files)"
+    echo "  help               Show this help message"
+    exit 1
+}
+
+if [ "$#" -lt 1 ]; then
+    usage
+fi
+
+COMMAND="$1"
+shift
+
+case "$COMMAND" in
+    add)
+        "$SCRIPT_DIR/add_dotfile.sh" "$@"
+        ;;
+    mv)
+        "$SCRIPT_DIR/rename_dotfile.sh" "$@"
+        ;;
+    update)
+        "$SCRIPT_DIR/update_packages.sh" "$@"
+        ;;
+    setup)
+        "$DOTFILES_DIR/setup.sh" "$@"
+        ;;
+    help|--help|-h)
+        usage
+        ;;
+    *)
+        echo "Error: Unknown command '$COMMAND'"
+        usage
+        ;;
+esac
