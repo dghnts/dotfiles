@@ -23,3 +23,7 @@ util-linux
 vim
 
 # Snap Packages
+Name         Version             Rev    Tracking       Publisher    Notes
+core         16-2.61.4-20250910  17272  latest/stable  canonical**  core
+hello-world  6.4                 29     latest/stable  canonical**  -
+snapd        2.73                25935  latest/stable  canonical**  snapd
