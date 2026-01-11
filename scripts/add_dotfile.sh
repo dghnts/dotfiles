@@ -23,9 +23,14 @@ if [ "$#" -lt 1 ]; then
 fi
 
 FILE_PATH="$1"
-# Expand ~
-if [[ "$FILE_PATH" == ~* ]]; then
-    FILE_PATH="${FILE_PATH/#\~/$HOME}"
+# If it's a bare filename (no slashes), assume it's in HOME
+if [[ "$FILE_PATH" != */* ]]; then
+    FILE_PATH="$HOME/$FILE_PATH"
+else
+    # Expand ~
+    if [[ "$FILE_PATH" == ~* ]]; then
+        FILE_PATH="${FILE_PATH/#\~/$HOME}"
+    fi
 fi
 # Resolve absolute path (even if it doesn't exist)
 FILE_PATH=$(readlink -m "$FILE_PATH")
