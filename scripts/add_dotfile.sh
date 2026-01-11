@@ -13,8 +13,8 @@ DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 SETUP_SH="$DOTFILES_DIR/setup.sh"
 
 usage() {
-    echo "Usage: $0 <file_path> [category]"
-    echo "Example: $0 ~/.vimrc vim"
+    echo "Usage: $0 <filename> [category]"
+    echo "Example: $0 .vimrc vim"
     exit 1
 }
 
@@ -22,16 +22,12 @@ if [ "$#" -lt 1 ]; then
     usage
 fi
 
-FILE_PATH="$1"
-# Expand ~
-if [[ "$FILE_PATH" == ~* ]]; then
-    FILE_PATH="${FILE_PATH/#\~/$HOME}"
-fi
-# Get absolute path
-FILE_PATH=$(realpath "$FILE_PATH")
+FILENAME="$1"
+# Ensure we are looking at the file in the HOME directory
+FILE_PATH="$HOME/$FILENAME"
 
 if [ ! -f "$FILE_PATH" ]; then
-    echo "Error: File $FILE_PATH does not exist."
+    echo "Error: File $FILE_PATH does not exist in your home directory."
     exit 1
 fi
 
