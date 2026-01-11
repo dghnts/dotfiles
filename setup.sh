@@ -13,12 +13,11 @@ FILES_TO_LINK=(
     "vim/.vimrv:.vimrv"
 )
 
-echo "Setting up dotfiles..."
-
-for entry in "${FILES_TO_LINK[@]}"; do
+link_file() {
+    local entry="$1"
     IFS=":" read -r src dest <<< "$entry"
-    src_path="$DOTFILES_DIR/$src"
-    dest_path="$HOME/$dest"
+    local src_path="$DOTFILES_DIR/$src"
+    local dest_path="$HOME/$dest"
 
     # Backup existing file if it's not a symlink and exists
     if [ -f "$dest_path" ] && [ ! -L "$dest_path" ]; then
@@ -32,6 +31,14 @@ for entry in "${FILES_TO_LINK[@]}"; do
     # Create symlink
     echo "Linking $dest_path -> $src_path"
     ln -sf "$src_path" "$dest_path"
-done
+}
 
-echo "Setup complete!"
+if [ -n "$1" ]; then
+    link_file "$1"
+else
+    echo "Setting up dotfiles..."
+    for entry in "${FILES_TO_LINK[@]}"; do
+        link_file "$entry"
+    done
+    echo "Setup complete!"
+fi

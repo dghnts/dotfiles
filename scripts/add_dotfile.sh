@@ -93,8 +93,8 @@ else
     chmod +x "$SETUP_SH"
 fi
 
-echo "Step 3: Running setup.sh..."
-bash "$SETUP_SH"
+echo "Step 3: Running setup.sh for the new file..."
+bash "$SETUP_SH" "$REL_SRC_PATH:$REL_DEST_PATH"
 
 echo "Step 4: Managing changes with Git..."
 cd "$DOTFILES_DIR"
