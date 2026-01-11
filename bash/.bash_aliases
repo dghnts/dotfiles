@@ -10,3 +10,4 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 # Dotfiles scripts aliases
 alias dotadd='add_dotfile.sh'
 alias dotupdate='update_packages.sh'
+alias dotmv="rename_dotfile.sh"

@@ -45,3 +45,17 @@ dotadd .vimrc vim
 2. `setup.sh` の `FILES_TO_LINK` 配列にエントリを追加
 3. `setup.sh` を実行してシンボリックリンクを再作成
 4. 変更を Git でコミット
+
+## ドットファイルの名前を変更する場合
+
+`dotmv` コマンドを使用することで、ホームディレクトリ側とリポジトリ側のファイル名を同時に変更し、`setup.sh` も更新できます。
+
+```bash
+dotmv <旧ファイル名> <新ファイル名>
+```
+
+**例: `.vimrv` を `.vimrc` に変更する場合**
+
+```bash
+dotmv .vimrv .vimrc
+```
