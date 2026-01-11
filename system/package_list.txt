@@ -20,5 +20,6 @@ ubuntu-minimal
 ubuntu-wsl
 unzip
 util-linux
+vim
 
 # Snap Packages
