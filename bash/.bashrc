@@ -123,3 +123,14 @@ export PATH="$HOME/.local/bin:$PATH"
 
 # Dotfiles scripts
 export PATH="$HOME/dotfiles/scripts:$PATH"
+
+# 
+export LANG=ja_JP.UTF-8
+export LANGUAGE=ja_JP:ja
+export LC_ALL=ja_JP.UTF-8
+
+. "$HOME/.local/share/../bin/env"
+eval "$(~/.local/bin/mise activate)"
+
+# settings for atcoder
+export ATCODER_ROOT="$(ghq root)/atcoder-workspace"
