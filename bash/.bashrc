@@ -122,7 +122,7 @@ export PATH="$HOME/.local/bin:$PATH"
 # ====== End of Antigravity Launcher Config ======
 
 # Dotfiles scripts
-export PATH="$HOME/dotfiles/scripts:$PATH"
+export PATH="$HOME/src/github.com/dghnts/dotfiles/scripts:$PATH"
 
 # 
 export LANG=ja_JP.UTF-8
